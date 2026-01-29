@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247392280343",
+    "project_id": "andflutter-25587",
+    "storage_bucket": "andflutter-25587.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247392280343:android:3c9cae2c56ca9923de2152",
+        "android_client_info": {
+          "package_name": "asia.and.andasia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzTIgHHs0HySRhRy_Yr7LTwr2fuHHhTFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
