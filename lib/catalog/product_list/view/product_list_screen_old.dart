@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:andasia/catalog/product_list/widgets/widgets.dart';
 import 'package:andasia/repositories/products/products.dart';
-import 'package:andasia/catalog/category/view/category_screen.dart';
 
 
 
@@ -91,20 +90,33 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 final section = _sectionsList![i];
                 return ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => CategoryScreen(
-                          section: section,
-                          allProducts: _productsList!,
-                        ),
-                      ),
-                    );
+                    // например, фильтрация товаров по категории
+                    print('Выбрана категория: ${section.name}');
+                    print('Подкатегории: ${section.children.map((e) => e.name).toList()}');
                   },
                   child: Text(section.name),
                 );
               },
             ),
+          ),
+
+          const SizedBox(height: 16),
+          Text(
+            'Товары',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(height: 8),
+
+          // Список товаров
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _productsList!.length,
+            separatorBuilder: (context, index) => const Divider(),
+            itemBuilder: (context, i) {
+              final product = _productsList![i];
+              return ProductTile(product: product);
+            },
           ),
         ],
       ),

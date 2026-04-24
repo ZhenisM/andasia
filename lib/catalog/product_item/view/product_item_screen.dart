@@ -47,6 +47,8 @@ class _ProductItemScreenState extends State<ProductItemScreen> {
                 style: const TextStyle(fontSize: 20)),
             Text('Категория: ${product!.section}',
                 style: const TextStyle(fontSize: 20)),
+            Text('ID категории: ${product!.sectionId}',
+                style: const TextStyle(fontSize: 20)),
 
             const SizedBox(height: 20),
             const Text('Цены:',
