@@ -24,6 +24,7 @@ class Price {
 class Product {
   final String id;
   final String? brend;
+  final String? fasovka;
   final String? article;
   final String name;
   final String section;
@@ -33,6 +34,7 @@ class Product {
   Product({
     required this.id,
     required this.brend,
+    required this.fasovka,
     required this.article,
     required this.name,
     required this.section,
@@ -47,6 +49,7 @@ class Product {
     return Product(
       id: json['id'],
       brend: json['brend'],
+      fasovka: json['fasovka'],
       article: json['article'],
       name: json['name'],
       section: json['section'],
