@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../auth/auth_service.dart';
+import '../theme/theme.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -66,7 +67,7 @@ class MainScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     elevation: 2,
                     shadowColor: Colors.white,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: primaryColor,
                 ),
             ),
             ElevatedButton(

@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 
+const primaryColor = Color(0xFF005095);
+
 final darkTheme = ThemeData(
-  scaffoldBackgroundColor: Colors.grey[900],
+  scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme.light(
-    primary: Colors.yellow,
+    primary: Colors.black,
     secondary: Colors.green,
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.yellow,
+    backgroundColor: primaryColor,
     titleTextStyle: TextStyle(
-      color: Colors.black, // цвет текста заголовка
+      color: Colors.white, // цвет текста заголовка
       fontSize: 20,
       fontWeight: FontWeight.bold,
     ),
   ),
   dividerColor: Colors.white24,
-  listTileTheme: const ListTileThemeData(iconColor: Colors.white),
+  listTileTheme: const ListTileThemeData(iconColor: Colors.black),
   textTheme: TextTheme(
     bodyMedium: const TextStyle(
-      color: Colors.white, // цвет текста заголовка
+      color: Colors.black, // цвет текста заголовка
       fontSize: 20,
       fontWeight: FontWeight.w500,
     ),

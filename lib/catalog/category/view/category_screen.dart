@@ -19,6 +19,7 @@ class CategoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(section.name),
+        centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
