@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:andasia/features/product_list/widgets/widgets.dart';
+import 'package:andasia/catalog/product_list/widgets/widgets.dart';
 import 'package:andasia/repositories/products/products.dart';
 
 

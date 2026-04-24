@@ -9,7 +9,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           //backgroundColor: Colors.deepOrangeAccent,
-          title: Text('Список дел',
+          title: Text('Proff Channel',
             //style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
@@ -73,7 +73,7 @@ class MainScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/products-list');
               },
-              child: Text('Список товаров', style: TextStyle(color: Colors.white),),
+              child: Text('Каталог', style: TextStyle(color: Colors.white),),
               style: ElevatedButton.styleFrom(
                 elevation: 2,
                 shadowColor: Colors.white,
