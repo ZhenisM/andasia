@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../auth/auth_service.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -14,10 +15,43 @@ class MainScreen extends StatelessWidget {
           centerTitle: true,
           actions: [
             IconButton(
-              icon: Icon(Icons.person),
-              onPressed: () {
-                Navigator.pushNamed(context, '/auth');
-                },
+              icon: Icon(Icons.logout_outlined),
+              onPressed: () async {
+                bool? confirm = await showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text("Выход"),
+                    content: Text("Вы уверены, что хотите выйти?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: Text("Отмена"),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, true),
+                        child: Text("Выйти"),
+                      ),
+                    ],
+                  ),
+                );
+
+                if (confirm == true) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Вы вышли из аккаунта")),
+                  );
+                  await Future.delayed(Duration(milliseconds: 300));
+
+                  await AuthService.logout();
+
+                  if (!context.mounted) return;
+
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/auth',
+                        (route) => false,
+                  );
+                }
+              },
             ),
           ],
         ),

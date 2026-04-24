@@ -7,7 +7,7 @@ import 'package:andasia/auth/login_screen.dart';
 import 'package:andasia/auth/splash_screen.dart';
 
 final routes = {
-  '/': (context) => MainScreen(),
+  '/': (context) => SplashScreen(),
   '/home': (context) => MainScreen(),
   '/auth': (context) => LoginScreen(),
   '/products-list': (context) => const ProductListScreen(),

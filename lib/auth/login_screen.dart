@@ -23,12 +23,11 @@ class _LoginScreenState extends State<LoginScreen > {
     });
 
     final response = await http.post(
-      Uri.parse("https://www.an-d.asia/rest/myapi.user.login"),
-      headers: {"Content-Type": "application/json"},
-      body: json.encode({
+      Uri.parse("https://www.an-d.asia/ajax/login.php"),
+      body: {
         "login": _loginController.text,
         "password": _passwordController.text,
-      }),
+      },
     );
 
     setState(() {
@@ -36,19 +35,26 @@ class _LoginScreenState extends State<LoginScreen > {
     });
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data["result"] != null) {
-        String token = data["result"]["token"];
+      if (response.body.isNotEmpty) {
 
-        // Сохраняем токен локально
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString("auth_token", token);
+        final data = json.decode(response.body);
 
-        // Переход на главную страницу
-        Navigator.pushReplacementNamed(context, "/home");
+        if (data["result"] != null) {
+          String token = data["result"]["token"];
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString("auth_token", token);
+
+          Navigator.pushReplacementNamed(context, "/home");
+        } else {
+          setState(() {
+            _errorMessage = data["error_description"] ?? "Ошибка авторизации";
+          });
+        }
+
       } else {
         setState(() {
-          _errorMessage = data["error_description"] ?? "Ошибка авторизации";
+          _errorMessage = "Пустой ответ сервера";
         });
       }
     } else {

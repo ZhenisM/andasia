@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,23 +17,41 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _decideRoute() async {
     try {
-      // небольшая задержка для имитации загрузки
       await Future.delayed(const Duration(seconds: 2));
 
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('auth_token');
 
-      debugPrint('TOKEN: $token'); // <-- проверим, что реально приходит
+      debugPrint('TOKEN: $token');
 
       if (!mounted) return;
 
       if (token != null && token.isNotEmpty) {
-        Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
-      } else {
-        Navigator.of(context).pushNamedAndRemoveUntil('/auth', (route) => false);
+
+        final response = await http.post(
+          Uri.parse("https://www.an-d.asia/ajax/check.php"),
+          body: {"token": token},
+        ).timeout(const Duration(seconds: 5));
+
+        final data = json.decode(response.body);
+
+        if (data["result"] != null && data["result"]["valid"] == true) {
+          Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+          return;
+        }
+
+        // токен невалидный → удаляем
+        await prefs.remove('auth_token');
       }
+
+      Navigator.of(context).pushNamedAndRemoveUntil('/auth', (route) => false);
+
     } catch (e, st) {
       debugPrint('Splash error: $e\n$st');
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('auth_token');
+
       if (!mounted) return;
       Navigator.of(context).pushNamedAndRemoveUntil('/auth', (route) => false);
     }
