@@ -10,6 +10,12 @@ final darkTheme = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     backgroundColor: primaryColor,
+    iconTheme: IconThemeData(
+      color: Colors.white, // иконки слева
+    ),
+    actionsIconTheme: IconThemeData(
+      color: Colors.white, // иконки справа (menu и т.д.)
+    ),
     titleTextStyle: TextStyle(
       color: Colors.white, // цвет текста заголовка
       fontSize: 20,
