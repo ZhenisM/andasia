@@ -29,6 +29,7 @@ class Product {
   final String name;
   final String section;
   final String sectionId;
+  final String? image;
   final List<Price> prices;
 
   Product({
@@ -39,6 +40,7 @@ class Product {
     required this.name,
     required this.section,
     required this.sectionId,
+    required this.image,
     required this.prices,
   });
 
@@ -54,6 +56,7 @@ class Product {
       name: json['name'],
       section: json['section'],
       sectionId: json['sectionId'],
+      image: json['image'],
       prices: pricesList,
     );
   }
