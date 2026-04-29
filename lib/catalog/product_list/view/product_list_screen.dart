@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:andasia/repositories/products/products.dart';
 import 'package:andasia/catalog/category/view/category_screen.dart';
+import 'package:andasia/common/menu/menu_screen.dart';
 
 
 
@@ -36,23 +37,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   void _menuOpen() {
     Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Меню'),
-            ),
-            body: Row(
-              children: [
-                ElevatedButton(onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-                }, child: Text('На главную')),
-                Padding(padding: EdgeInsets.only(left: 15)),
-                Text('Наше простое меню')
-              ],
-            ),
-          );
-        })
+      MaterialPageRoute(
+        builder: (_) => MenuScreen(
+          sections: _sectionsList!,
+          products: _productsList!,
+        ),
+      ),
     );
   }
 
@@ -97,6 +87,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       builder: (_) => CategoryScreen(
                         section: section,
                         allProducts: _productsList!,
+                        allSections: _sectionsList!,
                       ),
                     ),
                   );

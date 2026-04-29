@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:andasia/repositories/products/products.dart';
 import 'package:andasia/catalog/product_list/widgets/product_tile.dart';
+import 'package:andasia/common/menu/menu_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
   final Section section;
   final List<Product> allProducts;
+  final List<Section> allSections;
 
   const CategoryScreen({
     super.key,
     required this.section,
     required this.allProducts,
+    required this.allSections,
   });
+
+  void _menuOpen(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => MenuScreen(
+          sections: allSections,
+          products: allProducts,
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +35,12 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(section.name),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu_outlined),
+            onPressed: () => _menuOpen(context),
+          ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -43,6 +64,7 @@ class CategoryScreen extends StatelessWidget {
                       builder: (_) => CategoryScreen(
                         section: child,
                         allProducts: allProducts,
+                        allSections: allSections,
                       ),
                     ),
                   );
